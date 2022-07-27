@@ -1,0 +1,102 @@
+---
+title: "Explore - R for Data Science"
+author: "Pete Lawson"
+date: "2022-07-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+```
+
+# Explore
+
+Exercises for **Explore** section of the [R for Data Science](https://r4ds.had.co.nz/) textbook.
+
+## Data Visualization
+
+### First Steps 
+
+#### 3.2.4 Exercises
+
+1. Run ggplot(data = mpg). What do you see?
+
+- empty gray background
+
+2. How many rows are in mpg? How many columns?
+
+- There are `r nrow(mpg)` rows and `r ncol(mpg)` cols.
+
+3. What does the drv variable describe? Read the help for ?mpg to find out.
+
+- the type of drive train, where f = front-wheel drive, r = rear wheel drive, 4 = 4wd
+
+4. Make a scatterplot of hwy vs cyl.
+
+
+```{r scatter, echo=FALSE}
+ggplot(data = mpg, aes(x = cyl, y = hwy)) +
+  geom_point() +
+  xlab("Number of Cylinders") +
+  ylab("Highway Miles (per gallon)")
+```
+
+5. What happens if you make a scatterplot of class vs drv? Why is the plot not useful?
+
+```{r scatter-class-drv, echo=FALSE}
+ggplot(data = mpg, aes(x = drv, y = class)) +
+  geom_point() +
+  xlab("Drivetrain") +
+  ylab("Class of vehicle")
+```
+
+- Not useful, both variables are categorical, no continuous relationship exists between variables.
+
+#### 3.3.1 Exercises
+
+1. What’s gone wrong with this code? Why are the points not blue?
+
+```{r bad-map, eval=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
+```
+
+- By assigning color inside aes, color is mapped to a variable, since only a factor of len 1 is present ("blue"), it is mapped to the first color in the default palette, red.
+
+2. Which variables in mpg are categorical? Which variables are continuous? (Hint: type ?mpg to read the documentation for the dataset). How can you see this information when you run mpg?
+
+- Categorical: Manufacturer, model, year, cyl, trans, drv, fl, class;
+- Continuous: disp, cty, hwy
+- Described under colname, inferred by type, for ex. chr is a character, and thus a categorical label. Year, although an int, is in this case categorical. Cyl is also an int but is categorical; there is no 4.5 cylinder car (unless it is having a serious mechanical failure).
+  
+3. Map a continuous variable to color, size, and shape. How do these aesthetics behave differently for categorical vs. continuous variables?
+
+```{r map-explore, echo=TRUE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = class, size=cty, shape = class))
+```
+
+4. What happens if you map the same variable to multiple aesthetics?
+
+- The variables legends are combined. 
+
+5. What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)
+
+```{r stroke, echo=TRUE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = class, size=cty, shape = class),
+             stroke = 2)
+```
+
+- Changes the thickness of line border on points. 
+
+6. What happens if you map an aesthetic to something other than a variable name, like aes(colour = displ < 5)? Note, you’ll also need to specify x and y.
+
+
+```{r conditional-map, echo=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color =  displ < 5)) 
+```
+
+- Colors points meeting that condition in one color, points not meeting that condition in another. FALSE is first alphabetically, so receives first color in pallete (red) and TRUE receives blue.
