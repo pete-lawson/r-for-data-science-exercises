@@ -1,24 +1,22 @@
---
-title: "Explore - R for Data Science"
-author: "Pete Lawson"
-date: "2022-07-27"
-output: html_document
+---
+title: "Data Visualization"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(ggplot2)
-```
-
-# Explore
+# Data Visualizaiton
 
 Exercises for **Explore** section of the [R for Data Science](https://r4ds.had.co.nz/) textbook.
 
-## Data Visualization
 
-### First Steps 
+## Introduction
 
-#### 3.2.4 Exercises
+## First steps
+## 3.2.4 Exercises
+
+```{r}
+#| label: load-packages
+#| include: false 
+library(ggplot2)
+```
 
 1. Run ggplot(data = mpg). What do you see?
 
@@ -36,6 +34,7 @@ the type of drive train, where f = front-wheel drive, r = rear wheel drive, 4 = 
 
 
 ```{r scatter, echo=FALSE}
+library(ggplot2)
 ggplot(data = mpg, aes(x = cyl, y = hwy)) +
   geom_point() +
   xlab("Number of Cylinders") +
