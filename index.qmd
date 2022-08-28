@@ -1,0 +1,6 @@
+# Background {.unnumbered}
+
+This `Quarto` book collects all of my completed exercises and notes from @wickham_r_2016.
+
+::: {#refs}
+:::
