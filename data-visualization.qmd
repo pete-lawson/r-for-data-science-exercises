@@ -2,15 +2,19 @@
 title: "Data Visualization"
 ---
 
-# Data Visualizaiton
-
-Exercises for **Explore** section of the [R for Data Science](https://r4ds.had.co.nz/) textbook.
-
-
 ## Introduction
 
-## First steps
-## 3.2.4 Exercises
+### Prerequisites
+
+## First steps 
+
+### The `mpg` data frame
+
+### Creating a ggplot
+
+### A graphing template
+
+### Exercises
 
 ```{r}
 #| label: load-packages
@@ -18,19 +22,19 @@ Exercises for **Explore** section of the [R for Data Science](https://r4ds.had.c
 library(ggplot2)
 ```
 
-1. Run ggplot(data = mpg). What do you see?
+#### Run ggplot(data = mpg). What do you see?
 
 empty gray background
 
-2. How many rows are in mpg? How many columns?
+#### How many rows are in mpg? How many columns?
 
 There are `r nrow(mpg)` rows and `r ncol(mpg)` cols.
 
-3. What does the drv variable describe? Read the help for ?mpg to find out.
+#### What does the drv variable describe? Read the help for ?mpg to find out.
 
 the type of drive train, where f = front-wheel drive, r = rear wheel drive, 4 = 4wd
 
-4. Make a scatterplot of hwy vs cyl.
+#### Make a scatterplot of hwy vs cyl.
 
 
 ```{r scatter, echo=FALSE}
@@ -41,7 +45,7 @@ ggplot(data = mpg, aes(x = cyl, y = hwy)) +
   ylab("Highway Miles (per gallon)")
 ```
 
-5. What happens if you make a scatterplot of class vs drv? Why is the plot not useful?
+#### What happens if you make a scatterplot of class vs drv? Why is the plot not useful?
 
 ```{r scatter-class-drv, echo=FALSE}
 ggplot(data = mpg, aes(x = drv, y = class)) +
@@ -50,7 +54,7 @@ ggplot(data = mpg, aes(x = drv, y = class)) +
   ylab("Class of vehicle")
 ```
 
-Not useful, both variables are categorical, no continuous relationship exists between variables.
+<div class="solve">Not useful, both variables are categorical, no continuous relationship exists between variables.</div>
 
 #### 3.3.1 Exercises
 

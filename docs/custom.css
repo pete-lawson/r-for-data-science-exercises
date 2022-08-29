@@ -1,0 +1,13 @@
+div.solve {
+  padding: 1em;
+  margin: 1em 0;
+  padding-left: 80px;
+  background-size: 50px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  color: #000000;
+  background-color: #ecf9eb;
+  border: solid 5px #c2ebbe;
+  background-image: url("./images/lightbulb.png");
+}

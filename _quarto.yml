@@ -7,13 +7,18 @@ book:
   author: "Pete Lawson"
   chapters:
     - index.qmd
-    - explore.qmd
+    - introduction.qmd
+    - part: "Explore"
+      chapters:
+        - explore-introduction.qmd
+        - data-visualization.qmd
 
 bibliography: references.bib
 
 format:
   html:
     theme: cosmo
+    css: custom.css
   pdf:
     documentclass: scrreprt
 
