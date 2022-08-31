@@ -56,9 +56,11 @@ ggplot(data = mpg, aes(x = drv, y = class)) +
 
 <div class="solve">Not useful, both variables are categorical, no continuous relationship exists between variables.</div>
 
-#### 3.3.1 Exercises
+## Aesthetic Mapping
 
-1. What’s gone wrong with this code? Why are the points not blue?
+### Exercises
+
+#### What’s gone wrong with this code? Why are the points not blue?
 
 ```{r bad-map, eval=FALSE}
 ggplot(data = mpg) + 
@@ -67,25 +69,25 @@ ggplot(data = mpg) +
 
 By assigning color inside aes, color is mapped to a variable, since only a factor of len 1 is present ("blue"), it is mapped to the first color in the default palette, red.
 
-2. Which variables in mpg are categorical? Which variables are continuous? (Hint: type ?mpg to read the documentation for the dataset). How can you see this information when you run mpg?
+#### Which variables in mpg are categorical? Which variables are continuous? (Hint: type ?mpg to read the documentation for the dataset). How can you see this information when you run mpg?
 
-*Categorical*: Manufacturer, model, year, cyl, trans, drv, fl, class;
-*Continuous*: disp, cty, hwy
+*Categorical*: Manufacturer, model, year, trans, drv, fl, class;
+*Continuous*: disp, cty, hwy, cyl
 
-Described under colname, inferred by type, for ex. chr is a character, and thus a categorical label. Year, although an int, is in this case categorical. Cyl is also an int but is categorical; there is no 4.5 cylinder car (unless it is having a serious mechanical failure).
-  
-3. Map a continuous variable to color, size, and shape. How do these aesthetics behave differently for categorical vs. continuous variables?
+Described under colname, inferred by type, for ex. chr is a character, and thus a categorical label. Year, although an int, is in this case categorical. Cyl is difficult, it seems like a discrete category (there are no 4.5 cylinder cars), however cylinder count is continous with regards to engine power. A more appropriate measure might be engine displacement.
+
+#### Map a continuous variable to color, size, and shape. How do these aesthetics behave differently for categorical vs. continuous variables?
 
 ```{r map-explore, echo=TRUE}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, color = class, size=cty, shape = class))
 ```
 
-4. What happens if you map the same variable to multiple aesthetics?
+#### What happens if you map the same variable to multiple aesthetics?
 
 The variables legends are combined. 
 
-5. What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)
+#### What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)
 
 ```{r stroke, echo=TRUE}
 ggplot(data = mpg) + 
@@ -95,7 +97,7 @@ ggplot(data = mpg) +
 
 Changes the thickness of line border on points. 
 
-6. What happens if you map an aesthetic to something other than a variable name, like aes(colour = displ < 5)? Note, you’ll also need to specify x and y.
+#### What happens if you map an aesthetic to something other than a variable name, like aes(colour = displ < 5)? Note, you’ll also need to specify x and y.
 
 
 ```{r conditional-map, echo=FALSE}
@@ -105,14 +107,17 @@ ggplot(data = mpg) +
 
 Colors points meeting that condition in one color, points not meeting that condition in another. FALSE is first alphabetically, so receives first color in palette (red) and TRUE receives blue.
 
+## Common Problems
 
-#### 3.5.1 Exercises
+## Facets
 
-1. What happens if you facet on a continuous variable?
+### Exercises
+
+#### What happens if you facet on a continuous variable?
 
 A facet is created for every occurrence of a unique continuous variable. 
 
-2. What do the empty cells in plot with facet_grid(drv ~ cyl) mean? How do they relate to this plot?
+#### What do the empty cells in plot with facet_grid(drv ~ cyl) mean? How do they relate to this plot?
 
 ```{r no-facet-grid, echo=FALSE}
 ggplot(data = mpg) + 
@@ -126,7 +131,7 @@ ggplot(data = mpg) +
   facet_grid(drv ~ cyl)
 ```
 
-3. What plots does the following code make? What does . do?
+#### What plots does the following code make? What does . do?
 ```{r mystery-plot, execute=FALSE}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) +
@@ -139,7 +144,7 @@ ggplot(data = mpg) +
 
 Facet grid uses a row by column ordering. In the first plot, it will show facets by drive (f, r, 4) by row. The second plot will show cylinder count by column. The . is a dummy variable indicating no data. The code will not run without the dummy variable.
 
-4. Take the first faceted plot in this section:
+#### Take the first faceted plot in this section:
 
 ```{r facet-advantage, execute=FALSE}
 ggplot(data = mpg) + 
@@ -151,6 +156,9 @@ What are the advantages to using faceting instead of the colour aesthetic? What 
 
 Groups differentiated by color become difficult to discern when using more than 6 or more colors. Additionally, poor color choices can result in an inability to discern differences by group for those with colorblindness. Facets provide an unambiguous way of separating data by a categorical variable. It can make a visual comparison more difficult, which can be resolved by keeping each variable aligned along a common orientation (row vs column). With a larger number of variables, facets may become cumbersome. 
 
-5. Read ?facet_wrap. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn’t facet_grid() have nrow and ncol arguments?
+#### Read `?facet_wrap`. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn’t `facet_grid()` have nrow and ncol arguments?
 
-6. When using facet_grid() you should usually put the variable with more unique levels in the columns. Why?
+Facet_wrap wraps a 1D ribbon of panels into 2D. The number of rows (or columns) is dictated by nrow and ncol respectively. `facet_grid()` doesn't have nrow or ncol arguments because it is a multivariate facet, with col and row length dictated by the number of facets for that particular variable. In the event that there is only one variable, then for a facet on column, the row = 1, and for a facet on row, the col = 1.
+
+#### When using `facet_grid()` you should usually put the variable with more unique levels in the columns. Why?
+Visualizations are traditionally in landscape orientation. This by putting the variable with more unique levels in the columns you ensure the resultant visualization follows landscape orientation.
