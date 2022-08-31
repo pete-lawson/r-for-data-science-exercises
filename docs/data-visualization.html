@@ -201,6 +201,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#a-graphing-template" id="toc-a-graphing-template" class="nav-link" data-scroll-target="#a-graphing-template"> <span class="header-section-number">3.2.3</span> A graphing template</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"> <span class="header-section-number">3.2.4</span> Exercises</a></li>
   </ul></li>
+  <li><a href="#aesthetic-mapping" id="toc-aesthetic-mapping" class="nav-link" data-scroll-target="#aesthetic-mapping"> <span class="header-section-number">3.3</span> Aesthetic Mapping</a>
+  <ul class="collapse">
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1"> <span class="header-section-number">3.3.1</span> Exercises</a></li>
+  </ul></li>
+  <li><a href="#common-problems" id="toc-common-problems" class="nav-link" data-scroll-target="#common-problems"> <span class="header-section-number">3.4</span> Common Problems</a></li>
+  <li><a href="#facets" id="toc-facets" class="nav-link" data-scroll-target="#facets"> <span class="header-section-number">3.5</span> Facets</a>
+  <ul class="collapse">
+  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2"> <span class="header-section-number">3.5.1</span> Exercises</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -273,24 +282,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Not useful, both variables are categorical, no continuous relationship exists between variables.
 </div>
 </section>
-<section id="exercises-1" class="level4" data-number="3.2.4.6">
-<h4 data-number="3.2.4.6" class="anchored" data-anchor-id="exercises-1"><span class="header-section-number">3.2.4.6</span> 3.3.1 Exercises</h4>
-<ol type="1">
-<li>What’s gone wrong with this code? Why are the points not blue?</li>
-</ol>
+</section>
+</section>
+<section id="aesthetic-mapping" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="aesthetic-mapping"><span class="header-section-number">3.3</span> Aesthetic Mapping</h2>
+<section id="exercises-1" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="exercises-1"><span class="header-section-number">3.3.1</span> Exercises</h3>
+<section id="whats-gone-wrong-with-this-code-why-are-the-points-not-blue" class="level4" data-number="3.3.1.1">
+<h4 data-number="3.3.1.1" class="anchored" data-anchor-id="whats-gone-wrong-with-this-code-why-are-the-points-not-blue"><span class="header-section-number">3.3.1.1</span> What’s gone wrong with this code? Why are the points not blue?</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span> </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> <span class="st">"blue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>By assigning color inside aes, color is mapped to a variable, since only a factor of len 1 is present (“blue”), it is mapped to the first color in the default palette, red.</p>
-<ol start="2" type="1">
-<li>Which variables in mpg are categorical? Which variables are continuous? (Hint: type ?mpg to read the documentation for the dataset). How can you see this information when you run mpg?</li>
-</ol>
-<p><em>Categorical</em>: Manufacturer, model, year, cyl, trans, drv, fl, class; <em>Continuous</em>: disp, cty, hwy</p>
-<p>Described under colname, inferred by type, for ex. chr is a character, and thus a categorical label. Year, although an int, is in this case categorical. Cyl is also an int but is categorical; there is no 4.5 cylinder car (unless it is having a serious mechanical failure).</p>
-<ol start="3" type="1">
-<li>Map a continuous variable to color, size, and shape. How do these aesthetics behave differently for categorical vs.&nbsp;continuous variables?</li>
-</ol>
+</section>
+<section id="which-variables-in-mpg-are-categorical-which-variables-are-continuous-hint-type-mpg-to-read-the-documentation-for-the-dataset.-how-can-you-see-this-information-when-you-run-mpg" class="level4" data-number="3.3.1.2">
+<h4 data-number="3.3.1.2" class="anchored" data-anchor-id="which-variables-in-mpg-are-categorical-which-variables-are-continuous-hint-type-mpg-to-read-the-documentation-for-the-dataset.-how-can-you-see-this-information-when-you-run-mpg"><span class="header-section-number">3.3.1.2</span> Which variables in mpg are categorical? Which variables are continuous? (Hint: type ?mpg to read the documentation for the dataset). How can you see this information when you run mpg?</h4>
+<p><em>Categorical</em>: Manufacturer, model, year, trans, drv, fl, class; <em>Continuous</em>: disp, cty, hwy, cyl</p>
+<p>Described under colname, inferred by type, for ex. chr is a character, and thus a categorical label. Year, although an int, is in this case categorical. Cyl is difficult, it seems like a discrete category (there are no 4.5 cylinder cars), however cylinder count is continous with regards to engine power. A more appropriate measure might be engine displacement.</p>
+</section>
+<section id="map-a-continuous-variable-to-color-size-and-shape.-how-do-these-aesthetics-behave-differently-for-categorical-vs.-continuous-variables" class="level4" data-number="3.3.1.3">
+<h4 data-number="3.3.1.3" class="anchored" data-anchor-id="map-a-continuous-variable-to-color-size-and-shape.-how-do-these-aesthetics-behave-differently-for-categorical-vs.-continuous-variables"><span class="header-section-number">3.3.1.3</span> Map a continuous variable to color, size, and shape. How do these aesthetics behave differently for categorical vs.&nbsp;continuous variables?</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class, <span class="at">size=</span>cty, <span class="at">shape =</span> class))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -306,13 +318,13 @@ specifying shapes manually if you must have them.</code></pre>
 <p><img src="data-visualization_files/figure-html/map-explore-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<ol start="4" type="1">
-<li>What happens if you map the same variable to multiple aesthetics?</li>
-</ol>
+</section>
+<section id="what-happens-if-you-map-the-same-variable-to-multiple-aesthetics" class="level4" data-number="3.3.1.4">
+<h4 data-number="3.3.1.4" class="anchored" data-anchor-id="what-happens-if-you-map-the-same-variable-to-multiple-aesthetics"><span class="header-section-number">3.3.1.4</span> What happens if you map the same variable to multiple aesthetics?</h4>
 <p>The variables legends are combined.</p>
-<ol start="5" type="1">
-<li>What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)</li>
-</ol>
+</section>
+<section id="what-does-the-stroke-aesthetic-do-what-shapes-does-it-work-with-hint-use-geom_point" class="level4" data-number="3.3.1.5">
+<h4 data-number="3.3.1.5" class="anchored" data-anchor-id="what-does-the-stroke-aesthetic-do-what-shapes-does-it-work-with-hint-use-geom_point"><span class="header-section-number">3.3.1.5</span> What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class, <span class="at">size=</span>cty, <span class="at">shape =</span> class),</span>
@@ -330,9 +342,9 @@ specifying shapes manually if you must have them.</code></pre>
 </div>
 </div>
 <p>Changes the thickness of line border on points.</p>
-<ol start="6" type="1">
-<li>What happens if you map an aesthetic to something other than a variable name, like aes(colour = displ &lt; 5)? Note, you’ll also need to specify x and y.</li>
-</ol>
+</section>
+<section id="what-happens-if-you-map-an-aesthetic-to-something-other-than-a-variable-name-like-aescolour-displ-5-note-youll-also-need-to-specify-x-and-y." class="level4" data-number="3.3.1.6">
+<h4 data-number="3.3.1.6" class="anchored" data-anchor-id="what-happens-if-you-map-an-aesthetic-to-something-other-than-a-variable-name-like-aescolour-displ-5-note-youll-also-need-to-specify-x-and-y."><span class="header-section-number">3.3.1.6</span> What happens if you map an aesthetic to something other than a variable name, like aes(colour = displ &lt; 5)? Note, you’ll also need to specify x and y.</h4>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="data-visualization_files/figure-html/conditional-map-1.png" class="img-fluid" width="672"></p>
@@ -340,15 +352,21 @@ specifying shapes manually if you must have them.</code></pre>
 </div>
 <p>Colors points meeting that condition in one color, points not meeting that condition in another. FALSE is first alphabetically, so receives first color in palette (red) and TRUE receives blue.</p>
 </section>
-<section id="exercises-2" class="level4" data-number="3.2.4.7">
-<h4 data-number="3.2.4.7" class="anchored" data-anchor-id="exercises-2"><span class="header-section-number">3.2.4.7</span> 3.5.1 Exercises</h4>
-<ol type="1">
-<li>What happens if you facet on a continuous variable?</li>
-</ol>
+</section>
+</section>
+<section id="common-problems" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="common-problems"><span class="header-section-number">3.4</span> Common Problems</h2>
+</section>
+<section id="facets" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="facets"><span class="header-section-number">3.5</span> Facets</h2>
+<section id="exercises-2" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="exercises-2"><span class="header-section-number">3.5.1</span> Exercises</h3>
+<section id="what-happens-if-you-facet-on-a-continuous-variable" class="level4" data-number="3.5.1.1">
+<h4 data-number="3.5.1.1" class="anchored" data-anchor-id="what-happens-if-you-facet-on-a-continuous-variable"><span class="header-section-number">3.5.1.1</span> What happens if you facet on a continuous variable?</h4>
 <p>A facet is created for every occurrence of a unique continuous variable.</p>
-<ol start="2" type="1">
-<li>What do the empty cells in plot with facet_grid(drv ~ cyl) mean? How do they relate to this plot?</li>
-</ol>
+</section>
+<section id="what-do-the-empty-cells-in-plot-with-facet_griddrv-cyl-mean-how-do-they-relate-to-this-plot" class="level4" data-number="3.5.1.2">
+<h4 data-number="3.5.1.2" class="anchored" data-anchor-id="what-do-the-empty-cells-in-plot-with-facet_griddrv-cyl-mean-how-do-they-relate-to-this-plot"><span class="header-section-number">3.5.1.2</span> What do the empty cells in plot with facet_grid(drv ~ cyl) mean? How do they relate to this plot?</h4>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="data-visualization_files/figure-html/no-facet-grid-1.png" class="img-fluid" width="672"></p>
@@ -360,9 +378,9 @@ specifying shapes manually if you must have them.</code></pre>
 <p><img src="data-visualization_files/figure-html/facet-grid-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<ol start="3" type="1">
-<li>What plots does the following code make? What does . do?</li>
-</ol>
+</section>
+<section id="what-plots-does-the-following-code-make-what-does-.-do" class="level4" data-number="3.5.1.3">
+<h4 data-number="3.5.1.3" class="anchored" data-anchor-id="what-plots-does-the-following-code-make-what-does-.-do"><span class="header-section-number">3.5.1.3</span> What plots does the following code make? What does . do?</h4>
 <div class="cell" data-execute="false">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
@@ -378,9 +396,9 @@ specifying shapes manually if you must have them.</code></pre>
 </div>
 </div>
 <p>Facet grid uses a row by column ordering. In the first plot, it will show facets by drive (f, r, 4) by row. The second plot will show cylinder count by column. The . is a dummy variable indicating no data. The code will not run without the dummy variable.</p>
-<ol start="4" type="1">
-<li>Take the first faceted plot in this section:</li>
-</ol>
+</section>
+<section id="take-the-first-faceted-plot-in-this-section" class="level4" data-number="3.5.1.4">
+<h4 data-number="3.5.1.4" class="anchored" data-anchor-id="take-the-first-faceted-plot-in-this-section"><span class="header-section-number">3.5.1.4</span> Take the first faceted plot in this section:</h4>
 <div class="cell" data-execute="false">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span> </span>
@@ -391,10 +409,14 @@ specifying shapes manually if you must have them.</code></pre>
 </div>
 <p>What are the advantages to using faceting instead of the colour aesthetic? What are the disadvantages? How might the balance change if you had a larger dataset?</p>
 <p>Groups differentiated by color become difficult to discern when using more than 6 or more colors. Additionally, poor color choices can result in an inability to discern differences by group for those with colorblindness. Facets provide an unambiguous way of separating data by a categorical variable. It can make a visual comparison more difficult, which can be resolved by keeping each variable aligned along a common orientation (row vs column). With a larger number of variables, facets may become cumbersome.</p>
-<ol start="5" type="1">
-<li><p>Read ?facet_wrap. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn’t facet_grid() have nrow and ncol arguments?</p></li>
-<li><p>When using facet_grid() you should usually put the variable with more unique levels in the columns. Why?</p></li>
-</ol>
+</section>
+<section id="read-facet_wrap.-what-does-nrow-do-what-does-ncol-do-what-other-options-control-the-layout-of-the-individual-panels-why-doesnt-facet_grid-have-nrow-and-ncol-arguments" class="level4" data-number="3.5.1.5">
+<h4 data-number="3.5.1.5" class="anchored" data-anchor-id="read-facet_wrap.-what-does-nrow-do-what-does-ncol-do-what-other-options-control-the-layout-of-the-individual-panels-why-doesnt-facet_grid-have-nrow-and-ncol-arguments"><span class="header-section-number">3.5.1.5</span> Read <code>?facet_wrap</code>. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn’t <code>facet_grid()</code> have nrow and ncol arguments?</h4>
+<p>Facet_wrap wraps a 1D ribbon of panels into 2D. The number of rows (or columns) is dictated by nrow and ncol respectively. <code>facet_grid()</code> doesn’t have nrow or ncol arguments because it is a multivariate facet, with col and row length dictated by the number of facets for that particular variable. In the event that there is only one variable, then for a facet on column, the row = 1, and for a facet on row, the col = 1.</p>
+</section>
+<section id="when-using-facet_grid-you-should-usually-put-the-variable-with-more-unique-levels-in-the-columns.-why" class="level4" data-number="3.5.1.6">
+<h4 data-number="3.5.1.6" class="anchored" data-anchor-id="when-using-facet_grid-you-should-usually-put-the-variable-with-more-unique-levels-in-the-columns.-why"><span class="header-section-number">3.5.1.6</span> When using <code>facet_grid()</code> you should usually put the variable with more unique levels in the columns. Why?</h4>
+<p>Visualizations are traditionally in landscape orientation. This by putting the variable with more unique levels in the columns you ensure the resultant visualization follows landscape orientation.</p>
 
 
 </section>
